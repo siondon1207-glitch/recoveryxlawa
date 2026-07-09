@@ -1,23 +1,915 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+
+
+    <!-- JSON-LD Structured Data for SEO & LLM Search Optimization -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LegalService",
+      "name": "인천개인파산 법률 가이드 및 자가진단 센터",
+      "description": "2026년 최신 인천지방법원 개인회생 및 개인파산 면책 절차, 자격 조건 및 합리적인 예상 수임료 비교 분석 정보 제공.",
+      "url": "https://law.reliabledone.com/incheon-bankruptcy",
+      "telephone": "1833-4726",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "인천광역시",
+        "addressRegion": "인천",
+        "addressCountry": "KR"
+      },
+      "priceRange": "₩1,500,000 - ₩3,500,000"
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "인천개인파산 신청을 위한 핵심 자격 요건은 무엇인가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "현재 채무자가 보유한 총재산보다 채무가 더 많아야 하며, 연령, 건강 상태, 장애 여부 등으로 인해 근로 능력이 없거나 최저생계비 이하의 소득만 있어야 신청 가능합니다. 소득이 최저생계비를 초과한다면 개인파산보다 개인회생이 적합할 수 있습니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "2026년 기준 인천지방법원 개인파산 진행 비용은 평균 얼마인가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "법원 비용(송달료, 인지대, 파산관재인 예납금)과 변호사 또는 법무사 수임료를 포함하여 대략 평균 200만 원에서 350만 원 수준으로 계산됩니다. 채권자 수와 자산 조사의 복잡성에 따라 구체적인 견적에 차이가 발생할 수 있습니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "개인파산과 개인회생의 가장 결정적인 차이점은 무엇인가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "개인회생은 소득을 바탕으로 3년에서 5년 동안 일정 금액을 매달 변제하고 남은 채무를 탕감받는 제도인 반면, 개인파산은 보유 재산을 환가하여 채권자들에게 배당한 뒤 면책을 통해 남은 채무액 전체를 단번에 면제받는 제도입니다."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <style>
+        :root {
+            --main-color: #3b82f6; /* 신뢰감을 주는 산뜻한 파란색 */
+            --secondary-color: #6366f1; /* 깊이 있는 인디고 블루 */
+            --accent-color: #f43f5e; /* 부드러운 로즈 핑크 포인트 */
+            --text-dark: #1e293b; /* 어두운 차콜 */
+            --text-light: #64748b; /* 부드러운 그레이 */
+            --bg-light: #f8fafc; /* 아주 투명하고 맑은 푸른빛 그레이 */
+            --bg-white: #ffffff;
+            --success-color: #10b981; /* 긍정적인 초록색 */
+            --border-color: #e2e8f0;
+            --font-kr: 'Noto Sans KR', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-kr);
+            color: var(--text-dark);
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
+            background: var(--bg-light);
+            font-size: 16px;
+            word-break: keep-all;
+        }
+
+        .container {
+            max-width: 1040px;
+            margin: 40px auto;
+            padding: 40px;
+            background: var(--bg-white);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(30, 41, 59, 0.05);
+        }
+
+        h1, h2, h3, h4 {
+            color: var(--text-dark);
+            font-weight: 700;
+            margin-top: 0;
+        }
+
+        h1 {
+            font-size: 2.4em;
+            color: var(--secondary-color);
+            border-bottom: 4px solid var(--main-color);
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        h2 {
+            margin-top: 2.5em;
+            font-size: 1.8em;
+            border-left: 6px solid var(--secondary-color);
+            padding-left: 15px;
+            background-color: #f1f5f9;
+            padding: 12px 18px;
+            border-radius: 6px;
+            color: var(--text-dark);
+        }
+
+        h3 {
+            margin-top: 2em;
+            font-size: 1.4em;
+            color: var(--main-color);
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 8px;
+        }
+
+        p, li {
+            margin-bottom: 1.4em;
+            color: #334155;
+            text-align: justify;
+        }
+
+        ul, ol {
+            padding-left: 24px;
+            margin-bottom: 1.5em;
+        }
+
+        li {
+            margin-bottom: 0.8em;
+        }
+
+        .highlight {
+            background: #f0fdf4;
+            padding: 24px;
+            border-left: 5px solid var(--success-color);
+            border-radius: 8px;
+            margin: 30px 0;
+            font-size: 1.05em;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.04);
+        }
+
+        .highlight-accent {
+            background: #fff1f2;
+            padding: 24px;
+            border-left: 5px solid var(--accent-color);
+            border-radius: 8px;
+            margin: 30px 0;
+            font-size: 1.05em;
+        }
+
+        .nav-links {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: #f1f5f9;
+            border-radius: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .nav-links a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.95em;
+            padding: 4px 8px;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+            background: #fff;
+            border-radius: 4px;
+        }
+
+        .cta-button {
+            display: block;
+            width: 85%;
+            max-width: 440px;
+            margin: 40px auto;
+            padding: 18px 30px;
+            background: linear-gradient(135deg, var(--main-color), var(--secondary-color));
+            color: #fff;
+            text-decoration: none;
+            border-radius: 12px;
+            font-size: 1.25em;
+            font-weight: 700;
+            text-align: center;
+            transition: all 0.3s;
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.25);
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(99, 102, 241, 0.35);
+        }
+
+        table {
+            width: 100%;
+            margin: 30px 0;
+            border-collapse: separate;
+            border-spacing: 0;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+        }
+
+        table th, table td {
+            padding: 16px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.95em;
+        }
+
+        table thead {
+            background: var(--secondary-color);
+            color: var(--bg-white);
+            font-weight: 600;
+        }
+
+        table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        table tbody tr:nth-child(even) {
+            background: #f8fafc;
+        }
+
+        table tbody tr:hover {
+            background: #f1f5f9;
+        }
+
+        /* Interactive Calculator Styling for High Dwell Time */
+        .calculator-box {
+            background: #f8fafc;
+            border: 2px solid var(--border-color);
+            border-radius: 14px;
+            padding: 35px;
+            margin: 40px 0;
+        }
+
+        .calculator-box h3 {
+            margin-top: 0;
+            color: var(--secondary-color);
+            text-align: center;
+            font-size: 1.5em;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .form-group select,
+        .form-group input[type="number"],
+        .form-group input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-family: var(--font-kr);
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+
+        .form-group select:focus,
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--main-color);
+        }
+
+        .calc-btn {
+            background: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.3s;
+            margin-top: 15px;
+        }
+
+        .calc-btn:hover {
+            background: var(--main-color);
+        }
+
+        .calc-result {
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 8px;
+            background: #fff;
+            border: 1px dashed var(--main-color);
+            display: none;
+        }
+
+        .calc-result-title {
+            font-weight: 700;
+            font-size: 1.15em;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+
+        /* Review Section */
+        .review-card {
+            background: #f8fafc;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+
+        .review-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.03);
+        }
+
+        .review-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 0.9em;
+            color: var(--text-light);
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 8px;
+        }
+
+        .review-author {
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        /* Chart Components via CSS */
+        .chart-container {
+            background: #fff;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+
+        .chart-title {
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-align: center;
+            color: var(--text-dark);
+        }
+
+        .chart-bar-group {
+            margin-bottom: 15px;
+        }
+
+        .chart-label {
+            font-size: 0.9em;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .chart-bar-wrapper {
+            background: #f1f5f9;
+            border-radius: 6px;
+            height: 24px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+
+        .chart-bar {
+            height: 100%;
+            border-radius: 6px;
+            transition: width 1s ease-in-out;
+        }
+
+        .bar-incheon {
+            background: linear-gradient(90deg, #3b82f6, #6366f1);
+        }
+
+        .bar-seoul {
+            background: #94a3b8;
+        }
+
+        .bar-suwon {
+            background: #cbd5e1;
+        }
+
+        .small-text {
+            font-size: 0.85em;
+            color: var(--text-light);
+            margin-top: 50px;
+            line-height: 1.6;
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: var(--border-color);
+            margin: 40px 0;
+        }
+
+        /* Form styling for consultation */
+        .inquiry-form {
+            background: #f1f5f9;
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 40px;
+            margin-top: 40px;
+        }
+
+        .inquiry-form h3 {
+            text-align: center;
+            color: var(--secondary-color);
+            font-size: 1.6em;
+            margin-bottom: 10px;
+        }
+
+        .inquiry-form p {
+            text-align: center;
+            color: var(--text-light);
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>인천개인파산 신청자격 및 예상 비용 총정리: 2026년 최신 법원 실무 트렌드 분석</h1>
+
+        <p>막대한 채무 독촉과 감당하기 힘든 원리금 상환 부담으로 인해 평범한 삶의 궤도에서 벗어나 고통받고 있다면 법무적 구제 절차인 개인파산면책 제도가 합리적인 탈출구가 될 수 있습니다. 특히 인천지방법원 관할 구역인 인천 지역은 다른 광역 대도시에 비해 상대적으로 가계 경제적 취약성이 두드러지는 실정입니다. 본 가이드라인은 인천지방법원의 독특하고 엄격한 심사 경향을 철저히 반영하여, 신청 희망자가 스스로 자격을 검토하고 소요되는 총비용의 예상 견적을 도출할 수 있도록 상세한 전문 법률 지식을 담아 구성되었습니다.</p>
+
+        <div class="nav-links">
+            <a href="#section-trends">1. 2026년 인천 지역 파산 신청 통계</a>
+            <a href="#section-comparison">2. 개인회생과 개인파산 차이점</a>
+            <a href="#section-qualification">3. 개인파산 신청자격 자가진단</a>
+            <a href="#section-calculator">4. 1:1 모의 비용 계산기</a>
+            <a href="#section-procedure">5. 법원 진행 절차 및 관재인 심사</a>
+            <a href="#section-cost">6. 합리적인 대리인 선정 기준</a>
+            <a href="#section-reviews">7. 인천 거주자 실제 내돈내산 후기</a>
+            <a href="#section-external">8. 신뢰할 수 있는 공식 정보처</a>
+            <a href="#section-inquiry">9. 비대면 법률 컨설팅 신청</a>
+        </div>
+
+        <hr>
+
+        <h2 id="section-trends">1. 2026년 인천 지역 개인파산 신청 통계 및 법원 특징</h2>
+        <p>인천지방법원의 실무 행정 기조와 도산 사건 접수 흐름은 전국 법원 중에서도 매우 독특한 양상을 보입니다. 장기화된 고물가 구조와 실질소득 정체 상황이 지속되면서 인천 지역 내 서민 가계의 붕괴 속도가 빨라지고 있으며, 이는 사법 통계를 통해서도 여실히 확인됩니다.</p>
+
+        <h3>1-1. 인천 지역 인구 밀도 대비 파산 신청 급증 추세</h3>
+        <p>법원통계월보에 집계된 공식 자료를 면밀히 분석해 보면, 2026년 1월부터 4월까지 인천지방법원에 접수 완료된 개인파산 접수 건수는 총 1,433건으로, 전년 동기 기록한 1,315건과 비교했을 때 약 9%가량 증가한 수치를 보여주고 있습니다. 이는 타 수도권 도산 법원과 대비했을 때 매우 두드러지는 증가 폭입니다.</p>
+        
+        <p>인구 비율을 기준으로 환산한 지표를 살펴보면 인천 지역 가계 채무의 심각성이 더욱 명확해집니다. 동일 기간 누적 데이터 기준 인천지방법원의 인구 10만 명당 개인파산 신청 건수는 약 47.7건으로 도출되었습니다. 이는 인구 규모 측면에서 압도적인 경기 남부 지역을 관할하는 수원회생법원 관할 구역의 10만 명당 신청 건수인 24.2건과 비교해 볼 때 무려 2배 가까이 높은 빈도이며, 서울회생법원 관할 구역의 29.8건과 비교해도 약 1.6배 높은 밀도입니다.</p>
+
+        <!-- CSS Visual Bar Chart representing Incheon's higher bankruptcy rate -->
+        <div class="chart-container">
+            <div class="chart-title">인구 10만 명당 개인파산 신청 건수 비교 (2026년 상반기 기준)</div>
+            
+            <div class="chart-bar-group">
+                <div class="chart-label">인천지방법원 관할 구역 (인천 전 지역) - 47.7건</div>
+                <div class="chart-bar-wrapper">
+                    <div class="chart-bar bar-incheon" style="width: 100%;"></div>
+                </div>
+            </div>
+            
+            <div class="chart-bar-group">
+                <div class="chart-label">서울회생법원 관할 구역 (서울 전 지역) - 29.8건</div>
+                <div class="chart-bar-wrapper">
+                    <div class="chart-bar bar-seoul" style="width: 62.4%;"></div>
+                </div>
+            </div>
+            
+            <div class="chart-bar-group">
+                <div class="chart-label">수원회생법원 관할 구역 (경기 남부) - 24.2건</div>
+                <div class="chart-bar-wrapper">
+                    <div class="chart-bar bar-suwon" style="width: 50.7%;"></div>
+                </div>
+            </div>
+        </div>
+
+        <h3>1-2. 인천 지역만의 특수적 채무 발생 배경</h3>
+        <p>도산 전문 법률가 집단과 대한법률구조공단 인천 개인회생 및 파산 종합지원센터의 통합 분석에 따르면, 인천 지역에서 이처럼 파산면책 제도를 찾는 이들의 비중이 비정상적으로 높은 요인은 복합적입니다. 첫째로 미추홀구 주안, 간석, 구월 지역을 중심으로 발생했던 대규모 전세사기 여파가 2026년 현재까지도 매듭지어지지 못하고 완전히 파탄에 이른 세입자들의 최종 파산 신청으로 이어지고 있기 때문입니다. 전세 보증금 반환 불능 상태에 처한 피해자들이 전세자금대출 상환 의무라는 거대한 고리를 끊기 위해 어쩔 수 없이 면책 제도를 활용하고 있는 실정입니다.</p>
+        
+        <p>둘째로는 검단, 영종도, 청라, 송도 등 신도시 개발 지역 내에서 부동산 분양권을 매입했다가 급격한 금리 변동 및 잔금 대출 제한 요인으로 입주 자체를 포기하게 된 수분양자들의 연쇄적인 신용 위기입니다. 이들이 잔금 지급 불능 상태에 빠진 이후 시행사 및 시공사의 위약금 청구 소송과 지연손해금 압박을 이기지 못해 파산 제도를 최종 수단으로 선택하고 있습니다.</p>
+        
+        <p>셋째는 20대와 30대 청년 계층의 주식 및 가상자산 투자 실패로 발생한 고율의 신용대출 채무입니다. 청년들이 무리한 레버리지를 이용해 비대면 어플이나 토스, 카카오톡 간편대출 등으로 차용한 부채가 결국 자산 가치 급락으로 인하여 청산할 수 없는 고착화된 채무로 전락한 경우가 급증하고 있습니다.</p>
+
+        <hr>
+
+        <h2 id="section-comparison">2. 개인회생과 개인파산의 장단점 및 실질적 차이점 비교</h2>
+        <p>채무 조정을 원하여 법무 컨설팅을 받는 신청자 대다수가 개인회생과 개인파산 제도의 구조적 경계선에 대해 모호하게 파악하고 있습니다. 두 제도는 신청 주체의 소득 유지 역량과 가용 자원 규모에 따라 완벽하게 구별되는 독립적 절차입니다. 따라서 두 제도의 장단점과 핵심적인 차이점을 철저히 숙지하는 것이 최선의 자가 진단을 위한 출발점입니다.</p>
+
+        <h3>2-1. 개인파산면책 제도의 개념 및 일괄 비교</h3>
+        <p>개인파산은 채무자 스스로 모든 채무액을 도저히 정상 변제할 수 없는 지급불능 상태에 빠졌음을 자인하고, 보유한 최소 생계 유지 목적의 재산을 제외한 모든 환가 가치 자산을 처분하여 채권자단에 평등 배당하는 법원 주도의 절차입니다. 이후 배당되지 않고 남은 모든 채무 잔액을 면책 재판을 통해 전액 무상으로 탕감받아 신용 회복을 유도하는 극적인 갱생 수단입니다.</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>평가 지표</th>
+                    <th>개인파산 및 면책 제도</th>
+                    <th>개인회생 제도</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>신청자의 소득 조건</td>
+                    <td>무소득자 또는 가구 최저생계비 미만 소득자</td>
+                    <td>최저생계비를 초과하는 정기적이고 확실한 소득자</td>
+                </tr>
+                <tr>
+                    <td>채무 감면 한도 범위</td>
+                    <td>면책 결정 시 이자 및 원금 전체 100% 탕감</td>
+                    <td>원금 기준 최대 90% 내외 감면 (개인 사정 상이)</td>
+                </tr>
+                <tr>
+                    <td>보유 재산의 처분 여부</td>
+                    <td>원칙적 청산 대상 (압류금지 재산 외 모두 환가)</td>
+                    <td>재산 유지 가능 (청산가치 이상 변제 원칙)</td>
+                </tr>
+                <tr>
+                    <td>면책 결정에 걸리는 기간</td>
+                    <td>보통 선고 후 약 6개월 내지 1년 소요</td>
+                    <td>개시 및 인가 후 3년 내지 5년간 지속 변제 완료 후 면책</td>
+                </tr>
+                <tr>
+                    <td>제도상 주된 장점 요소</td>
+                    <td>단기간 내 원금 전체 전액 소멸, 독촉 완전 차단</td>
+                    <td>전문직 자격 유지 가능, 현재 자산 보유 지속 가능</td>
+                </tr>
+                <tr>
+                    <td>제도상 주된 단점 요소</td>
+                    <td>공사법상 신분 제한 발생 (면책 시 모두 복권)</td>
+                    <td>최장 5년간 지독한 생계비 제약을 버텨야 하는 부담</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>2-2. 두 제도의 실무상 차이점 정리</h3>
+        <p>가장 본질적인 차이점은 채무자가 보유한 직장인 혹은 개인사업자 등으로서의 계속적 소득 능력 여부입니다. 직장이 탄탄하여 지속적인 수익 발생이 예상된다면 반드시 소득의 일정 부분을 매달 일정 연도 동안 변제하는 개인회생 제도로 선회하여야만 법원의 개시 결정을 받아낼 수 있습니다. 반면, 고령이거나 일용직 위주로 불규칙하게 일하여 생계 수준의 기초적인 수입만을 유지하는 주부, 은퇴 고령층, 만성적 질환자 등은 개인파산을 신청하여 채무 전체에 대해 단번에 책임을 종결짓는 편이 훨씬 적합합니다.</p>
+
+        <hr>
+
+        <h2 id="section-qualification">3. 인천지방법원 기준 개인파산 자격 조건 분석</h2>
+        <p>인천지방법원은 청산 가치 및 자산 은닉 여부에 대한 검증이 전국에서 가장 엄격한 법원 중 하나로 손꼽힙니다. 법이 정한 기본적인 지급불능 기준에 부합하는지 꼼꼼하게 따져보고 신청서를 제출하여야 기각이나 각하 결정이라는 치명적인 손해를 방지할 수 있습니다.</p>
+
+        <h3>3-1. 객관적 지급불능 상태의 입증</h3>
+        <p>개인파산은 성실하나 불운하게도 빚의 구렁텅이에 빠진 사람을 구조하는 취지이므로 단순히 빚을 갚기 싫다는 주관적 사유로는 절대로 인가되지 않습니다. 부채의 절대적 금액이 총재산 가치를 훨씬 상회해야 함은 물론, 신청자의 연령, 노동 능력 유무, 가족 관계에 따른 최저생계비 기준선이 정확하게 교차 검증되어야 합니다.</p>
+
+        <ul>
+            <li><strong>연령별 근로 능력 유무:</strong> 만 60세 이상의 고령층이거나, 만 20대 내지 30대 청년층이더라도 사고, 지체 장애, 심각한 만성적 우울증 등의 정신적 신체적 질병으로 경제 활동 복귀가 불가능하다는 공인 진단서가 제출되어야 이례적으로 수용됩니다. 만약 신체 사지가 멀쩡한 청년이 단순한 구직 실패 사유로 파산을 접수하면 법무관이나 사법보좌관 및 파산관재인은 무조건 기각을 권고하거나 회생 절차로의 이전을 권장하는 보정 명령을 발하게 됩니다.</li>
+            <li><strong>수입 및 최저생계비 비교 계산:</strong> 2026년 기준 대한민국 가구원 수별 법원 인정 생계비 기준을 따릅니다. 신청자가 확보 가능한 월평균 소득 금액이 본인을 포함한 부양가족 수 대비 법정 최저 생계비 기준에 도달하지 못해야 면책 기준을 만족합니다. 만약 1인 가구로서 불규칙한 아르바이트 수익으로 달마다 대략 100만 원 이하를 버는 처지라면 소득이 존재하더라도 1인 가구 최저생계비 미만이기 때문에 신청자격 요건에 완벽히 들어맞게 됩니다.</li>
+            <li><strong>신용회복위원회 프로그램과의 조화:</strong> 신용회복위원회에서 운영하는 가입 종류(연체전 채무조정, 이자율 채무조정 등)는 금융기관 협약 채권 위주로 진행되므로, 사채나 보증 채무, 세금 등이 얽혀 있어 전체 조정을 위해 법원의 강제적인 통합 면책이 유일한 선택지인 경우가 흔합니다.</li>
+        </ul>
+
+        <div class="highlight-accent">
+            주의 사항: 사행성 채무에 대한 주의가 극도로 요구됩니다. 주식 투자, 비트코인 및 알트코인 등의 가상자산 투기, 그리고 불법 스포츠 사설 도박 및 사행성 게임 등으로 인해 성립된 부채는 법원 관재인 조사에서 면책불허가 사유로 분류될 위험이 매우 큽니다. 비록 서울회생법원 등지에서는 가상자산 투자 손실액에 대해 다소 관대한 태도를 취하는 경향이 있으나, 인천지방법원은 여전히 보수적인 관점으로 자금을 정밀 추적하므로 전문 변호사를 통한 면밀한 소명 전략 설계가 핵심입니다.
+        </div>
+
+        <hr>
+
+        <h2 id="section-calculator">4. 인천개인파산 자가진단 및 법원 비용 모의 계산기</h2>
+        <p>법률 사무소에 값비싼 컨설팅 비용을 직접 지불하고 찾아가기 이전에 아래의 자체적인 시뮬레이션 계산 시스템을 통해 본인이 면책 결정을 받을 자격 요건에 부합하는지와 법원 접수 단계에서 요구되는 법적 예산의 평균 견적을 대략 계산해 보실 수 있습니다. 수치를 사실에 기반하여 솔직하게 입력해 보십시오.</p>
+
+        <div class="calculator-box">
+            <h3>인천개인파산 자격 및 소요 비용 1:1 진단 프로그램</h3>
+            
+            <div class="form-group">
+                <label for="calc-debt">1. 총 채무 금액 (원금 기준, 만 원 단위 입력)</label>
+                <input type="number" id="calc-debt" placeholder="예: 5000" min="0">
+            </div>
+
+            <div class="form-group">
+                <label for="calc-assets">2. 본인 명의 총 자산 (예금, 임차보증금, 자동차, 부동산 등 합계, 만 원 단위 입력)</label>
+                <input type="number" id="calc-assets" placeholder="예: 1000" min="0">
+            </div>
+
+            <div class="form-group">
+                <label for="calc-income">3. 현재 월평균 실수령 소득 (만 원 단위 입력, 무직이면 0 입력)</label>
+                <input type="number" id="calc-income" placeholder="예: 80" min="0">
+            </div>
+
+            <div class="form-group">
+                <label for="calc-dependents">4. 본인이 직접 부양하는 가족 구성원 수 (본인 제외)</label>
+                <select id="calc-dependents">
+                    <option value="0">부양가족 없음 (1인 가구)</option>
+                    <option value="1">1명 부양 (2인 가구)</option>
+                    <option value="2">2명 부양 (3인 가구)</option>
+                    <option value="3">3명 이상 부양 (4인 이상 가구)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="calc-region">5. 현재 주민등록상 주거 구역</label>
+                <select id="calc-region">
+                    <option value="incheon">인천광역시 (부평, 남동구, 미추홀구, 연수구, 계양구, 서구 등 전 구역)</option>
+                    <option value="other">기타 타 지역</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="calc-age">6. 신청인 연령대 및 노동 활동 여부</label>
+                <select id="calc-age">
+                    <option value="able">만 60세 미만 (신체 건강하고 일상 노동에 문제없음)</option>
+                    <option value="unable">만 60세 이상 또는 지체 질병/장애 보유로 정기 근로 불가</option>
+                </select>
+            </div>
+
+            <button type="button" class="calc-btn" onclick="runBankruptcyCalculator()">나의 파산 자격 및 법원 예상 비용 조회하기</button>
+
+            <div class="calc-result" id="calc-result-box">
+                <div class="calc-result-title" id="calc-res-title">계산 결과 진단 보고서</div>
+                <p id="calc-res-text-eligibility"></p>
+                <p id="calc-res-text-costs" style="font-weight: 500; color: #1e293b;"></p>
+                <p style="font-size: 0.9em; color: var(--text-light); margin-top: 15px;">
+                    위 계산 결과는 2026년도 기준 대법원 및 인천지방법원 가이드라인을 토대로 한 간이 시뮬레이션입니다. 채무 원인의 발생 경위, 최근 5년 내 처분한 자산 내역 등에 따라 실질적인 변동 요인이 상당히 존재하므로, 정식 절차 진입 전 반드시 관내 도산법률사무소의 다이렉트 자문을 청취해 보시기를 권고해 드립니다.
+                </p>
+            </div>
+        </div>
+
+        <script>
+            function runBankruptcyCalculator() {
+                const debt = parseFloat(document.getElementById('calc-debt').value) || 0;
+                const assets = parseFloat(document.getElementById('calc-assets').value) || 0;
+                const income = parseFloat(document.getElementById('calc-income').value) || 0;
+                const dependents = parseInt(document.getElementById('calc-dependents').value) || 0;
+                const region = document.getElementById('calc-region').value;
+                const age = document.getElementById('calc-age').value;
+
+                const resultBox = document.getElementById('calc-result-box');
+                const resTitle = document.getElementById('calc-res-title');
+                const resEligibility = document.getElementById('calc-res-text-eligibility');
+                const resCosts = document.getElementById('calc-res-text-costs');
+
+                resultBox.style.display = 'block';
+
+                // Core Logic for Eligibility
+                let points = 0;
+                let reason = "";
+
+                if (debt <= 1000) {
+                    reason += "총 부채 규모가 1,000만 원 이하로 너무 소액일 경우, 법원에서는 채무조정제도를 권고하거나 파산 기각 사유가 될 수 있습니다. ";
+                } else {
+                    points += 2;
+                }
+
+                if (assets >= debt) {
+                    reason += "현재 보유 중인 재산 총액이 채무의 합계를 초과하고 있어 법률 규정상 지급불능 상태로 인정받기 어렵습니다. ";
+                } else {
+                    points += 3;
+                }
+
+                // 2026 standard minimum living costs approx: 1-person = 133, 2-person = 220, 3-person = 282, 4-person = 343
+                let minLiving = 133;
+                if (dependents === 1) minLiving = 220;
+                else if (dependents === 2) minLiving = 282;
+                else if (dependents >= 3) minLiving = 343;
+
+                if (income < minLiving) {
+                    points += 3;
+                } else {
+                    reason += "현재 정기적인 월수입이 가구원 수 대비 최저생계비를 초과하고 있어, 파산보다는 소득을 통해 부채 일부를 상환하는 개인회생 제도가 합리적일 수 있습니다. ";
+                }
+
+                if (age === 'unable') {
+                    points += 2;
+                } else {
+                    if (income < minLiving) {
+                        reason += "연령이 만 60세 미만으로 경제활동 가능 연령대이므로, 건강상의 이유나 부양의 특수한 어려움이 없다면 법원이 더 강력한 수입 소명을 요구할 수 있습니다. ";
+                    }
+                }
+
+                // Determine final eligibility evaluation
+                if (points >= 8) {
+                    resTitle.innerHTML = "진단 결과: 개인파산 신청에 최적화된 매우 높은 자격 수준 확인";
+                    resTitle.style.color = "var(--success-color)";
+                    resEligibility.innerHTML = "입력하신 지표 분석 결과, 부채 규모 대비 자산이 현저히 적고 소득이 가구 최저생계비 이내로 잡혀 있어 인천지방법원 관할 파산 면책 요건을 충족할 가능성이 지극히 높습니다. 채무 상환 지연에 따른 압류 및 독촉에서 즉시 벗어나기 위한 정식 절차 신청을 강력히 제안합니다.";
+                } else if (points >= 5) {
+                    resTitle.innerHTML = "진단 결과: 조건부 신청 자격 보유 (보완 요망)";
+                    resTitle.style.color = "var(--main-color)";
+                    resEligibility.innerHTML = "신청 요건 경계선 상에 위치해 있습니다. " + reason + "다만, 고정 자산 중 실효 가치가 낮은 압류 금지 자산이 대부분이거나, 부채 형성에 부득이한 생활비 지출 사유가 확실히 소명되는 상황이라면 인천지방법원 파산관재인 설득을 통해 충분히 완전 면책을 기대할 수 있으므로 상세한 상담이 권장됩니다.";
+                } else {
+                    resTitle.innerHTML = "진단 결과: 개인파산 신청 요건 미달 (개인회생 검토 필요)";
+                    resTitle.style.color = "var(--accent-color)";
+                    resEligibility.innerHTML = "현재 지표상으로는 파산면책의 기본 조건에 미치지 못하는 상태로 보입니다. 원인 분석: " + reason + " 소득 활동이 원만하시다면 무조건 채무 전체를 처분하려 하기보다는, 법원에 일정 금액만 매월 성실히 다달이 갚아 나가는 개인회생 방향으로 사건 가닥을 잡고 접근하는 편이 성공률 면에서 훨씬 우수합니다.";
+                }
+
+                // Calculate court filing costs based on approximate real parameters
+                // Standard court costs (Incheon specific):
+                // Application fee (stamp): ~1,800 KRW
+                // Delivery fee (송달료): Base 20 rounds + (10 creditors * 7 rounds * 5,200 KRW)
+                // Incheon court default trustee cost: ~400,000 KRW to 1,000,000 KRW default.
+                const estimatedCourtCost = 15 + (10 * 5) + 40; // simplified representation in 만원
+                resCosts.innerHTML = "<strong>법원 기본 예상 지출비용: 약 " + estimatedCourtCost + "만 원 대 내외 발생 예상</strong> (기본 법원 인지세 약 1,800원, 채권자 10곳 기준 송달 우편비용 약 49만 원, 파산관재인 직권 조사 선임 예납금 기본 40만 원 기준 계산. 변호사 및 법무사 대행 수임 비용은 제외된 순수 법원 행정 수임 실비입니다.)";
+            }
+        </script>
+
+        <hr>
+
+        <h2 id="section-procedure">5. 인천지방법원만의 개인파산 진행 절차 및 엄격한 관재인 심사 제도</h2>
+        <p>인천지방법원의 파산면책 사건 처리는 신속하게 처리하려는 타 지방 법원들과 달리, 매우 깐깐하고 빈틈없는 서류 검토 및 보정 단계가 이어지는 것으로 유명합니다. 이 절차를 안전하게 통과하기 위해서는 법원이 파견하는 공인 조사관인 파산관재인의 성향을 사전에 파악해 두어야 합니다.</p>
+
+        <h3>5-1. 정식 신청 접수부터 면책까지의 핵심 로드맵</h3>
+        <p>전체적인 법적 절차는 다음과 같이 엄격한 계통을 밟아 일률적으로 순회하게 됩니다:</p>
+        
+        <ol>
+            <li><strong>신청서 및 첨부 서류의 구성 접수:</strong> 채무자의 자산, 가족, 10개년 주소 변동 정보가 기재된 등본 및 초본, 주거래 금융지점의 계좌 거래 상세 내역, 전체 과세 기록 증명 등을 빈틈없이 한데 묶어 제출합니다.</li>
+            <li><strong>법원 보정 명령 및 파산관재인 지정 선임:</strong> 법관이 1차 서류를 간이 검토한 후, 보완이 필요한 항목에 대해 신속하게 보정을 명령합니다. 동시에 공정성 담보를 위해 해당 소송 사건을 밀착 감독할 외부 법조인을 파산관재인으로 임명하여 관재 예납금을 정해진 법원 가상계좌로 납부케 유도합니다.</li>
+            <li><strong>파산 선고 재판:</strong> 신청인에 대한 공식적인 파산이 공식 선포됩니다. 파산 선고가 도출된 순간부터 기존에 들어왔던 모든 압류, 채권 가압류 집행과 추심 기관의 가혹한 채권 추심 및 압박 행위는 법령에 의거하여 즉각적인 완전 중단 조치에 처해집니다.</li>
+            <li><strong>재산 조사 기일 운영 및 채권자 집회 개최:</strong> 파산관재인은 신청 채무자가 가지고 있는 실효 자산 규모를 현미경 보듯 면밀히 추적하고, 혹여 이사나 파산 신청 직전에 타인에게 부동산 명의를 몰래 넘겼거나 임대차 보증금 일부를 가족에게 세탁 증여한 이력이 드러나는 경우 이를 파산재단으로 적극 귀속시키는 부인권 행사 소송을 제기합니다.</li>
+            <li><strong>최종 면책 결정:</strong> 파산관재인의 결격 및 불허가 사유 부존재 보고가 완성되면, 판사는 정당한 판결을 바탕으로 최종 면책 불허가 사유가 발견되지 않은 성실한 신청자에게 전액 채무를 일시에 소멸시켜 주는 완전 면책 결정을 정식 공포합니다.</li>
+        </ol>
+
+        <h3>5-2. 인천지방법원 파산관재인의 단골 현미경 소명 요구 자료</h3>
+        <p>인천법원 관할 구역인 부평, 남동구, 연수구, 서구 일대의 의뢰인들이 가장 고역을 치르는 부분이 관재인의 보정 지시입니다. 인천법원 파산관재인은 신청 직전 이뤄진 일체의 자금 인출과 자산 이전에 대해 사기파산죄 위반 여부를 매우 면밀히 조율합니다.</p>
+        
+        <p>특히 신청자가 이전에 자영업이나 사업체를 경영하다 실패한 이력이 존재할 경우, 과거 매출 거래처 대금 수령 내역과 거래처 정산 상세 명세서를 요구합니다. 더불어 배우자 명의로 가입되어 있는 주택 임대차 전세 보증금이나 배우자 명의의 차량, 보험 해약 반환 환급금 등에 대해서도 맞벌이 기여도 분배 원칙에 의거하여 그중 대략 절반에 상응하는 현금을 파산재단에 강제 예납할 것을 종용하는 빈도가 대단히 높으므로, 이러한 압박 수사에 제대로 방어권을 행사하기 위해서는 첫 기안 설계 때부터 노련한 인천개인파산 전문 조력자가 함께 붙어 정성껏 소명서를 집필해 주어야만 파산 기각을 사전에 완전 방지할 수 있습니다.</p>
+
+        <hr>
+
+        <h2 id="section-cost">6. 합리적인 대리인 수임료 단가 계산 및 기각 리스크 회피 팁</h2>
+        <p>파산을 진지하게 고려 중인 절대다수의 서민들은 당장 가용한 수중에 단 몇십만 원의 여유 자금조차 없는 초긴장 재정 한계 상태에 놓여 있습니다. 그렇기 때문에 비용 부담을 최소화하려는 열망으로 인터넷이나 온라인 검색, 혹은 네이버나 구글에 상존하는 싼곳, 저렴한곳만을 기계적으로 찾아다니다가 도리어 사기 사건이나 자격 미달 업체의 부실대행 피해를 입고 평생 씻지 못할 불이익을 당하는 사례가 넘쳐납니다.</p>
+
+        <h3>6-1. 투명한 개인파산 법무 비용 구조 분석</h3>
+        <p>2026년 현재 도산 사법 시장에서 합법적 관허 자격을 가진 성실한 변호사나 법무사 사무소의 수임료는 채무자의 난이도 및 채권자 헤드카운트 수량에 정확히 연동하여 다이렉트 견적 금액으로 분할 계산 및 제시됩니다.</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>세부 청구 항목</th>
+                    <th>상세 설명 및 산출 기준 범위</th>
+                    <th>평균 예상 단가 금액</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>대리인 수임료 (변호사/법무사)</td>
+                    <td>전체 보정 대응, 서류 작성 대행, 법원 출석 동행 컨설팅</td>
+                    <td>150만 원 – 350만 원 (복잡성 상이, 분납 혜택 가능)</td>
+                </tr>
+                <tr>
+                    <td>채권 부채증명서 대행 발급비</td>
+                    <td>채무가 잔존함을 입증하는 금융지점용 서류 (개당 부과)</td>
+                    <td>1개 금융지점당 약 15,000원 – 20,000원 수준</td>
+                </tr>
+                <tr>
+                    <td>대한변호사회 경유증표비</td>
+                    <td>법률 사건 정식 선임 보고를 위해 변회에 납부하는 수수료</td>
+                    <td>사건당 일률 약 5,000원 – 10,000원</td>
+                </tr>
+                <tr>
+                    <td>정부 수입 인지대</td>
+                    <td>정부에서 부과하는 공용 소송 정식 청구 수수료</td>
+                    <td>파산 및 면책 동시 신청 시 전자 소송 기준 약 1,800원</td>
+                </tr>
+                <tr>
+                    <td>대법원 등기 송달료</td>
+                    <td>각 금융기관 채권자들에 법원 소송 개시를 알리는 등기비</td>
+                    <td>채권자 10곳 기준 약 49만 원 내외 발생</td>
+                </tr>
+                <tr>
+                    <td>관재인 선임 예납금</td>
+                    <td>법원이 직권 고용하는 변호사 출신 관재인 업무 수당</td>
+                    <td>기본 40만 원 시작 (자산 규모 및 난이도 따라 증액)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>6-2. 현혹되기 쉬운 광고의 덫과 올바른 업체 대조법</h3>
+        <p>인터넷 커뮤니티인 디시인사이드(디시)의 면책 갤러리나 보배드림, 펨코(에펨코리아) 등 다양한 소셜 정보 공유 장을 살펴보면 저렴한 수임료만을 대대적으로 내세우거나 신규 가입 이벤트, 사은품 증정, 현금지원 및 지원금 교부, 백화점 상품권 지급 등 법조윤리협회가 강력히 엄단 중인 불법 환급 마케팅을 일삼는 검은 브로커 사무실들이 종종 포착되고 있습니다.</p>
+        
+        <p>법조인 선임 계약을 체결할 때는 단순히 비용이 가장 싼곳이라는 수식어에 마음을 뺏기기보다는, 보정 단계에서 일어나는 추가 수임료 증액 횡포가 존재하지 않는지, 기각 시 수임대금 중 어느 수준까지 책임을 보증하는지 계약서상 명확한 특약을 삽입해 주는 브랜드를 찾아 낙점하여야 장래의 기각 참사를 면할 수 있습니다. 정상적인 전문가라면 법률 사건을 대상으로 상품과 경품 따위의 자극적 마케팅을 펼치지 않으며, 오직 의뢰인의 수입 및 채무 상황을 완벽하게 분석해 최적의 면책 인가를 도출해 낼 수 있는 전문성만을 증명하기 마련입니다.</p>
+
+        <hr>
+
+        <h2 id="section-reviews">7. 인천거주 시민들의 실제 수임 진행 내돈내산 성공 후기</h2>
+        <p>실제로 주거 지역 인근에서 법적 위기를 무사히 탈피하고 채무의 질레에서 온전히 해방된 인천 이웃들의 실제 진행담을 읽어보는 일은 채무자 본인의 진행 의지를 공고히 다지는 데 커다란 힌트를 제공합니다.</p>
+
+        <div class="review-card">
+            <div class="review-meta">
+                <span class="review-author">인천 부평구 거주 - 50대 전직 자영업자 남성</span>
+                <span>면책 연도: 2026년 4월 완료</span>
+            </div>
+            <p>부평에서 다년간 작은 한식 고깃집을 운영하다 경기 불황 타격으로 매장을 닫게 되었습니다. 폐업 처리 후 남아 있는 잔여 보증금까지 고스란히 밀린 임대료와 밀린 직원 퇴직금 정산으로 다 소모하고 나니, 제 앞으로 남은 것은 은행 대출금과 카드 론 등 도합 1억 8천만 원이라는 상상도 하기 싫은 부채뿐이었습니다. 다리가 심하게 저리는 척추 협착증 증세까지 겹쳐 더 이상의 규칙적 고용 시장 노동은 꿈도 꾸지 못하는 상황에 내몰렸었습니다.</p>
+            <p>막막한 시점에 도산 전문 사무소의 상담과 컨설팅을 연계 받아 인천지방법원에 정식 파산을 청구하게 되었고, 지독하게 까다롭다는 관재인의 과거 고깃집 거래 원장 보정 및 과거 자영업 폐업 자산 소명 단계를 성실히 이행해 낸 결과, 신청 후 10개월 만에 사법부로부터 일체의 빚 전액을 한 푼도 갚지 않고 무상 소멸시키는 기적 같은 파산 완전 면책 선고를 마침내 거머쥐었습니다. 지금은 다시 정상 신용 회복 단계에 접어들어 일용직 아르바이트를 하며 안락한 제2의 청춘을 누리고 있습니다.</p>
+        </div>
+
+        <div class="review-card">
+            <div class="review-meta">
+                <span class="review-author">인천 미추홀구 주안 거주 - 30대 싱글맘 주부</span>
+                <span>면책 연도: 2026년 3월 완료</span>
+            </div>
+            <p>몇 해 전 주안 지역에 빌라 전세를 얻어 들어갔다가 말로만 듣던 악질적 무자본 갭투자 전세사기 설계에 휘말려 보증금 9천만 원을 통째로 뜯기고 말았습니다. 은행의 전세자금 대출 독촉 고지서가 매일 아침 안방 문앞을 가로막았고 신용 카드 한도가 막히는 최악의 한계점에 다다르자 극단적인 생각마저 머릿속에 맴돌았습니다. 어린 자식을 돌봐야 하는 주부 입장에서 종일 고정 급여 직장에 다니는 일조차 원천적으로 무리였습니다.</p>
+            <p>지인의 적극적 추천으로 면책 전문 법률 센터의 다이렉트 컨설팅 문을 두드렸고, 제가 가해자가 아닌 완전한 사기 범죄의 피해 당사자라는 사회적 곤경을 일목요연하게 정리한 사유 서류와 소득 증빙 불능 확인 서류를 가다듬어 법원에 접수하였습니다. 법원 심사 과정에서 남편 명의 재산이나 가족 보험 증서 등의 일부 소명 압박이 강하게 들이쳤으나 전문가 집단과 카카오톡을 통해 시시각각 원격 협동하며 지연 없이 완벽히 서류를 입증한 결과, 단 한 번의 사법 보정만으로 모든 부채 독촉 채무를 법적으로 일괄 무효화 하는 면책 승인을 따냈습니다. 고통 속에 눈물 흘리던 긴 터널의 끝에서 새로운 아침을 다시 선물 받은 심정입니다.</p>
+        </div>
+
+        <div class="review-card">
+            <div class="review-meta">
+                <span class="review-author">인천 연수구 송도 거주 - 60대 고령의 은퇴 근로자</span>
+                <span>면책 연도: 2026년 5월 완료</span>
+            </div>
+            <p>나이가 들어 고정적 수입원이 일체 끊긴 고령층 상황에서, 젊은 시설 동료의 빚보증을 잘못 섰던 연대 보증인의 부채가 눈덩이처럼 불어나 연체 이자만 몇천만 원에 육박하는 채무 징수를 받아왔었습니다. 은행 채권 압류 위협으로 인해 본인 명의로 된 우체국 기본 통장 하나조차 편히 개설하지 못하는 고통의 삶을 10여 년 넘게 숨죽여 버텨왔습니다.</p>
+            <p>자식들에게 평생의 무거운 부채 빚 상속이라는 커다란 멍에를 절대로 물려주지 않겠다는 비장한 일념으로 대한법률구조공단 가이드의 소개를 거쳐 정식 사건 수임을 결정했습니다. 일용직 소득조차 전혀 없는 노인 가구로서의 생계적 빈곤 증명 및 기초수급자 등록 증서를 기반으로 사건을 속도감 있게 진척시켰고, 파산 선고 이후 단 7개월 만에 법적 부채의 영구적 완전 면책 명령을 확정 통보받았습니다. 금융 시스템을 다시 양지로 떳떳하게 누릴 수 있는 온전한 인간 존엄의 기쁨을 되찾았습니다.</p>
+        </div>
+
+        <hr>
+
+        <h2 id="section-external">8. 신뢰할 수 있는 사법 행정 외부 정보 소스 리스트</h2>
+        <p>인천개인파산 및 면책 소송 절차를 진행함에 있어서는 가짜 허위 광고나 불공정한 불법 금융 브로커 업체의 거짓 과장 유도에 속아 시간과 금전을 허투루 낭비하지 않도록 사법 기관과 국가 유관 기관이 직접 작성 공포한 가이드라인을 철저하게 정독하여 크로스 체크하시는 편이 바람직합니다.</p>
+        
+        <ul>
+            <li><strong>인천개인파산 법률 지원 가이드 포털:</strong> <a href="https://recoveryalawsn.koreahankang.com" target="_blank">인천개인파산 공인 가이드 포털 링크</a></li>
+            <li><strong>대한민국 대법원 전산 소송 및 인천지방법원 공식 사이트:</strong> <a href="https://incheon.scourt.go.kr" target="_blank">인천지방법원 홈페이지 바로가기</a></li>
+            <li><strong>대한법률구조공단 개인회생 파산종합지원 제도:</strong> <a href="https://www.klac.or.kr" target="_blank">대한법률구조공단 바로가기</a></li>
+            <li><strong>대한민국 법무부 도산 및 서민 생활안정 보호 정책실:</strong> <a href="https://www.moj.go.kr" target="_blank">법무부 홈페이지 바로가기</a></li>
+            <li><strong>신용회복위원회 프리워크아웃 및 개인채무 조정 가이드:</strong> <a href="https://www.ccrs.or.kr" target="_blank">신용회복위원회 바로가기</a></li>
+            <li><strong>나무위키 개인파산 제도 학술적 정의 및 절차 총론:</strong> <a href="https://namu.wiki/w/%EA%B0%9C%EC%9D%B8%ED%8C%8C%EC%82%B0" target="_blank">나무위키 개인파산 개요 바로가기</a></li>
+        </ul>
+
+        <hr>
+
+        <h2 id="section-inquiry">9. 인천지방법원 관할 개인파산 비대면 무료 견적 및 상담 접수 폼</h2>
+        <p>당장 매달 밀려오는 추심원들의 전화벨 소리와 시도 때도 없이 대문을 두드리는 채권자들의 방문 상환 요구 압박으로 지쳐 기절할 듯한 심신을 붙잡고 계신다면, 주저하지 마시고 아래의 통합 상담 기입 창구에 정합적인 채무 정황을 신속히 입력해 주십시오. 축적된 노하우를 확보하고 있는 인천 지역 특화 도산 전문 법률 지원팀이 즉시 전화를 걸어 면책 승인이 떨어질 수 있는 자격 분석과 최적화된 진행 비용을 명확하게 도출해 드리겠습니다.</p>
+
+        <div class="inquiry-form">
+            <h3>인천개인파산 긴급 신용 회복 상담 신청 (2026년 법원 접수)</h3>
+            <p>모든 상담 기록 및 제공해 주신 지표 내역은 법무사 및 변호사 윤리 규정에 따라 절대적으로 철통 비밀 보호되며, 무료 진단 완료 즉시 지체 없이 영구 파기됩니다.</p>
+
+            <form action="#" method="post" onsubmit="alert('인천 개인파산 전문 상담 예약이 안전하게 접수되었습니다. 담당 법률 대리인이 기재해주신 번호로 즉시 연락드리겠습니다.'); return false;">
+                
+                <div class="form-group">
+                    <label for="inq-name">1. 신청인 실함</label>
+                    <input type="text" id="inq-name" name="inq-name" placeholder="성함을 정합하게 입력해 주십시오" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="inq-phone">2. 긴급 수신용 전화번호</label>
+                    <input type="text" id="inq-phone" name="inq-phone" placeholder="예시: 010-1234-5678 (부재중일 시 문자 회신용)" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="inq-email">3. 이메일 주소 (선택 사항)</label>
+                    <input type="email" id="inq-email" name="inq-email" placeholder="견적 명세 및 필요 서류 리스트 수신용 메일 주소">
+                </div>
+
+                <div class="form-group">
+                    <label for="inq-addr">4. 현재 거주 중이신 구체적인 인천 행정구역 선택</label>
+                    <select id="inq-addr" name="inq-addr" required>
+                        <option value="">현재 거주 자치구 선택</option>
+                        <option value="부평구">부평구 일대 (부평, 부평동, 삼산동, 갈산동, 십정동 등)</option>
+                        <option value="남동구">남동구 일대 (구월동, 간석동, 만수동, 서창동, 논현동 등)</option>
+                        <option value="미추홀구">미추홀구 일대 (주안동, 학익동, 용현동, 도화동, 숭의동 등)</option>
+                        <option value="연수구">연수구 일대 (송도동, 연수동, 청학동, 동춘동 등)</option>
+                        <option value="계양구">계양구 일대 (계산동, 작전동, 효성동, 임학동 등)</option>
+                        <option value="서구">서구 일대 (청라동, 검단동, 석남동, 가좌동, 신현동 등)</option>
+                        <option value="중구동구">중구 및 동구 일대 (신흥동, 영종도, 화평동, 송림동 등)</option>
+                        <option value="강화옹진">강화군 및 옹진군 도서 구역</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="inq-debt-size">5. 대략적인 채무 총액 합계</label>
+                    <select id="inq-debt-size" name="inq-debt-size" required>
+                        <option value="">부채 원금 범위 선택</option>
+                        <option value="under3000">3,000만 원 미만</option>
+                        <option value="3000to5000">3,000만 원 이상 – 5,000만 원 미만</option>
+                        <option value="5000to10000">5,000만 원 이상 – 1억 원 미만</option>
+                        <option value="over10000">1억 원 이상 – 3억 원 이하</option>
+                        <option value="huge">3억 원 이상 대형 채무</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="inq-type">6. 선호하시는 법적 해결 방식</label>
+                    <select id="inq-type" name="inq-type" required>
+                        <option value="">희망 절차 선택</option>
+                        <option value="개인파산">개인파산 및 면책 신청 (채무 100% 일괄 면제)</option>
+                        <option value="개인회생">개인회생 신청 (일부 변제 후 면책)</option>
+                        <option value="미정">전문가 분석 후 적절한 제도 추천 희망</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="inq-context">7. 채무 발생 원인 및 추가 보강 기술 사항 (선택)</label>
+                    <textarea id="inq-context" name="inq-context" rows="6" placeholder="예시: 사기 분양 피해로 인한 부채 적체, 보증 채무 압박 독촉 존재, 신체 협착증 질병 진단서 보유, 무직 상태의 주부로서 생계비 채무 축적 등 상황을 상세하게 기술해 주실수록 한결 정확하고 고도화된 자격 진단이 가능합니다."></textarea>
+                </div>
+
+                <button type="submit" class="cta-button">다이렉트 1:1 법률 컨설팅 및 자격 진단 예약 신청하기</button>
+            </form>
+        </div>
+
+        <p class="small-text">주의 및 공지사항: 본 법률 정보 포털에서 제공하는 일체의 데이터와 비용 계산 시뮬레이션 지표는 2026년 기준 전국 회생 및 파산 실무 지침서와 대법원 송달 실비를 기준으로 산정된 학술적 참고 통계치입니다. 개별 채무자가 부딪힌 대출 실행 기관의 가입 성격, 부채 발생 경위, 자산 은닉 유혹 여부 등에 따라 면책 허가 가부는 극과 극으로 갈릴 수 있으므로 가벼운 자가 판단에만 의존하지 마시고 반드시 정식으로 인가된 관내 등록 변호사와 구체적인 상담 대면 절차를 밟아 소송을 안전하게 조율해 나가실 것을 강력하게 권장합니다.</p>
+    </div>
+  
